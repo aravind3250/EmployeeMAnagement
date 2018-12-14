@@ -152,23 +152,28 @@ var password=document.vform.password.value;
 	  alert("Password must be at least 6 charalecters long.");  
 	  return false;  
 	}
+ if()
 
 }  
 </script>  
 </head>
 <body>
 <div class="div1">
- 	<f:form action="validateemployee" modelAttribute="employee" method="post" name="vform" onsubmit="return validateform()" >
+ 	<f:form action="registeruser" modelAttribute="employee" method="post" name="vform" onsubmit="return validateform()" >
  	<div class="header">
-	<h2  align="left" style="color:#00004d">Employee Login</h2></div>
+	<h2  align="left" style="color:#00004d">User Registration</h2></div>
 	<f:button class="btn2" type="reset">Reset</f:button><br>
+	 <label for="uname"><b>User Name :</b></label>
+	<f:input path="uname" type="text" placeholder="Enter UserName" name="uname" required="true"/><br>
     <label for="email"><b>User Email :</b></label>
 	<f:input path="emailid" type="email" placeholder="Enter Email" name="email" required="true"/><br>
     <label for="psw"><b> Password :</b></label>
     <f:input path="password" type="password" placeholder="Enter Password" name="password" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br><br>
+     <label for="psw"><b> Password :</b></label>
+    <f:input path="rpassword" type="password" placeholder="Repeat Password" name="password" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br><br>
      </f:form>
-    <button class="btn">Sign in</button>
     <a href="register"><button class="btn1"> Register</button></a>
    		
     <h2 class="hh1"><a href="forgotPass.jsp" style="color: #00004d;font-size: 10px;">Forgot Password</a></h2><br>

@@ -8,9 +8,11 @@
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.1.xsd  http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	
+	<context:annotation-config/>
 	<!-- Add support for component scanning -->
-	<context:component-scan base-package="com.arvind.Employeemanagement" />
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:component-scan base-package="com.aravind.Employeemanagement" />
+	<context:property-placeholder location="classpath:empjdbc.properties" />
 
 	<!-- Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven />
@@ -37,7 +39,7 @@
 	<beans:bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="packagesToScan" value="com.arvind.Employreemanagement.model" />
+		<beans:property name="packagesToScan" value="com.aravind.Employeemanagement.model" />
 		<beans:property name="hibernateProperties">
 			<beans:props>
 				<beans:prop key="hibernate.dialect">${jdbc.dialect}</beans:prop>
