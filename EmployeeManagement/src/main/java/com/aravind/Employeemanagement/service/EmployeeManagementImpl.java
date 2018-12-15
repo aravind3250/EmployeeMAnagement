@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aravind.Employeemanagement.DAO.EmployeeManagementDAO;
 import com.aravind.Employeemanagement.model.EmployeeDetails;
+import com.aravind.Employeemanagement.model.UserDetails;
 
 @Service
 public class EmployeeManagementImpl implements EmployeeManagementService {
@@ -54,6 +55,13 @@ public class EmployeeManagementImpl implements EmployeeManagementService {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		return emloyeemanagementDAO.delete(id);
+	}
+
+	@Transactional
+	@Override
+	public boolean save(UserDetails userdetails) {
+		// TODO Auto-generated method stub
+		return emloyeemanagementDAO.save(userdetails);
 	}
 
 	

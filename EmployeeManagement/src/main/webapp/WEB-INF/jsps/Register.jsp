@@ -6,7 +6,7 @@
 <head>
 <style>
 body { 
-  margin:100px 160px;
+  margin:30px 160px;
   font-family: Arial;
 }
 body{
@@ -14,18 +14,18 @@ body{
 }
 
 .header{
-  	background-color:#66b3ff;
+  	background-color:#ffff;
   	padding: 1px ;
 }
 
 h1{
-	margin-top:5px;
-	margin-left:30px;
+	margin-top:0px;
 	color : #ffffff;
 	text-align: left;
-	font-size: 50px;
-	font-family: Rockwell Condensed;
+	font-size: 30px;
+	font-family: sans-serif;
 	font-style: normal;
+	font-weight: 300
 }
 
 img {
@@ -38,13 +38,11 @@ label{
 }
 
 .div1 {
-
     background-color: #ffffff;
-    border-color: blur #e6e6e6;
-    width: 350px;
-    border: 5px #66b3ff;
+    width: 300px;
+    margin-top:20px;
     margin-left:350px;
-    margin-right: 100px; 
+    padding:40px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
    }
@@ -52,40 +50,38 @@ label{
   
 input[type=text],[type=email], input[type=password] {
 	
-    width: 85%;
-    padding: 11px;
-    margin: 10px 13px;
-    display: inline-block;
-    border: none;
-    background: #d9d9d9;
-    border-radius: 12px;
+	display: block;
+  	box-sizing: border-box;
+  	margin-bottom: 20px;	
+  	padding: 4px;
+  	width: 300px;
+  	height: 32px;
+ 	border: none;
+  	border-bottom: 1px solid #AAA;
+  	font-family: 'Roboto', sans-serif;
+  	font-weight: 400;
+  	font-size: 15px;
+  	transition: 0.2s ease;
+  }
+  
+ input[type="text"]:focus,
+ input[type="email"]:focus,
+ input[type="password"]:focus {  
+ 
+  	border-bottom: 2px solid #16a085;
+  	color: #16a085;
+  	transition: 0.2s ease;
+  	outline: none;
 }
-.btn2 {
+ 
+ .btn {
 	position : absolute;
-	margin-top:10px;
-	margin-left:279px;
-    background-color:  #ff6600;
-    color: white;	 
-    font-size: 14px;
-    padding: 13px -1px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.btn2:hover {
-    background-color: #00004d;
-    color: white;
-    }
-.btn {
-	position : absolute;
-	margin-top:5px;
-	margin-left:120px;
+	margin-top:-15px;
+	margin-left:256px;
     background-color:  #ff6600;
     color: white;
     font-size: 15px;
-    padding: 8px 20px;
+    padding: 8px -1px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -97,17 +93,19 @@ input[type=text],[type=email], input[type=password] {
     color: white;
 }
 
+
+
 .btn1 {
 	position : absolute;
 	margin-top:5px;
-	margin-left  : 14px;
+	margin-left  : 41px;
     background-color: #ff6600;
     color: white;
     font-size: 15px;
     padding: 8px 13px;
     border: none;
     cursor: pointer;
-   border-radius: 5px;
+   	border-radius: 5px;
     text-align: center;
 }
 
@@ -115,6 +113,27 @@ input[type=text],[type=email], input[type=password] {
     background-color: #00004d;
     color: white;
 }
+
+.btn2 {
+	position : absolute;
+	margin-top:5px;
+	margin-left  : 180px;
+    background-color: #ff6600;
+    color: white;
+    font-size: 15px;
+    padding: 8px 22px;
+    border: none;
+    cursor: pointer;
+   	border-radius: 5px;
+    text-align: center;
+}
+
+.btn2:hover {
+    background-color: #00004d;
+    color: white;
+    }
+
+
 
 h2{
 	text-align:center;
@@ -152,31 +171,24 @@ var password=document.vform.password.value;
 	  alert("Password must be at least 6 charalecters long.");  
 	  return false;  
 	}
- if()
 
 }  
 </script>  
 </head>
 <body>
 <div class="div1">
- 	<f:form action="registeruser" modelAttribute="employee" method="post" name="vform" onsubmit="return validateform()" >
- 	<div class="header">
-	<h2  align="left" style="color:#00004d">User Registration</h2></div>
-	<f:button class="btn2" type="reset">Reset</f:button><br>
-	 <label for="uname"><b>User Name :</b></label>
-	<f:input path="uname" type="text" placeholder="Enter UserName" name="uname" required="true"/><br>
-    <label for="email"><b>User Email :</b></label>
-	<f:input path="emailid" type="email" placeholder="Enter Email" name="email" required="true"/><br>
-    <label for="psw"><b> Password :</b></label>
-    <f:input path="password" type="password" placeholder="Enter Password" name="password" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br><br>
-     <label for="psw"><b> Password :</b></label>
-    <f:input path="rpassword" type="password" placeholder="Repeat Password" name="password" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br><br>
+	<a href="index"><button class="btn" type="submit">back</button></a><br>
+ 	<f:form action="registeruser" modelAttribute="userdetails" method="post" name="vform" onsubmit="return validateform()" >
+	<h1  align="left" style="color:#00004d">Sign Up</h1>
+	<f:input path="uname" type="text" placeholder="User Name" name="uname" required="true"/><br>
+	<f:input path="emailid" type="email" placeholder="E-mail" name="email" required="true"/><br>
+   <f:input path="password" type="password" placeholder="Password"  required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br>
+    <f:input path="rpassword" type="password" placeholder="Retype Password"  required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br>
+    <f:button class="btn1"> Sign Up</f:button>
+    <f:button class="btn2" type="reset">Reset</f:button><br><br><br>
      </f:form>
-    <a href="register"><button class="btn1"> Register</button></a>
-   		
-    <h2 class="hh1"><a href="forgotPass.jsp" style="color: #00004d;font-size: 10px;">Forgot Password</a></h2><br>
 </div><br>
 
 </body>

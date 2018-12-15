@@ -8,5 +8,6 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
+<h2>this is analytics page</h2>
 </body>
 </html>

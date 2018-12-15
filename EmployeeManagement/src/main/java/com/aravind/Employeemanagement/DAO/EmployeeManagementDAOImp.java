@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.aravind.Employeemanagement.model.EmployeeDetails;
+import com.aravind.Employeemanagement.model.UserDetails;
 
 @Repository
 public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
@@ -51,9 +52,14 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 
 	@Override
 	public boolean save(EmployeeDetails empDetails) {
-		
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		try {
+			sessionfactory.getCurrentSession().save(empDetails);
+			flag = true;
+		}catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 	@Override
@@ -66,6 +72,18 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean save(UserDetails userdetails) {
+		boolean flag = false;
+		try {
+			sessionfactory.getCurrentSession().save(userdetails);
+			flag = true;
+		}catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 	
