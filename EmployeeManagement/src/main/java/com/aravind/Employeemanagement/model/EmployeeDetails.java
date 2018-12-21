@@ -1,15 +1,24 @@
 package com.aravind.Employeemanagement.model;
 
+import java.text.DecimalFormat;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "employee")
 public class EmployeeDetails {
+	
+	
 	
 	@Column
 	@Id
@@ -31,17 +40,24 @@ public class EmployeeDetails {
 	private String skills;
 	@Column(name = "password")
 	private String password;
-	@Column(name = "department")
+	@Column(name="department")
 	private String department;
 	@Column(name = "salary")
-	private Integer salary;
+	private Double salary;
 	
+	@Transient
+	private Double avgsalary;
+	
+	@Transient
+	private double percentage;
+
 	public EmployeeDetails() {
 		super();
 	}
 
 	public EmployeeDetails(Integer id, String fname, String lname, String emailid, Integer employeeid,
-			String designation, String gender, String skills, String password, String department, Integer salary) {
+			String designation, String gender, String skills, String password, String department, Double salary,
+			Double avgsalary, double percentage) {
 		super();
 		this.id = id;
 		this.fname = fname;
@@ -54,6 +70,8 @@ public class EmployeeDetails {
 		this.password = password;
 		this.department = department;
 		this.salary = salary;
+		this.avgsalary = avgsalary;
+		this.percentage = percentage;
 	}
 
 	public Integer getId() {
@@ -136,18 +154,35 @@ public class EmployeeDetails {
 		this.department = department;
 	}
 
-	public Integer getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(Integer salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
+	}
+
+	public Double getAvgsalary() {
+		return avgsalary;
+	}
+
+	public void setAvgsalary(Double avgsalary) {
+		this.avgsalary = avgsalary;
+	}
+
+	public double getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(double percentage) {
+		this.percentage = percentage;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((avgsalary == null) ? 0 : avgsalary.hashCode());
 		result = prime * result + ((department == null) ? 0 : department.hashCode());
 		result = prime * result + ((designation == null) ? 0 : designation.hashCode());
 		result = prime * result + ((emailid == null) ? 0 : emailid.hashCode());
@@ -157,6 +192,9 @@ public class EmployeeDetails {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lname == null) ? 0 : lname.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(percentage);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((salary == null) ? 0 : salary.hashCode());
 		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
 		return result;
@@ -171,6 +209,11 @@ public class EmployeeDetails {
 		if (getClass() != obj.getClass())
 			return false;
 		EmployeeDetails other = (EmployeeDetails) obj;
+		if (avgsalary == null) {
+			if (other.avgsalary != null)
+				return false;
+		} else if (!avgsalary.equals(other.avgsalary))
+			return false;
 		if (department == null) {
 			if (other.department != null)
 				return false;
@@ -216,6 +259,8 @@ public class EmployeeDetails {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (Double.doubleToLongBits(percentage) != Double.doubleToLongBits(other.percentage))
+			return false;
 		if (salary == null) {
 			if (other.salary != null)
 				return false;
@@ -233,8 +278,12 @@ public class EmployeeDetails {
 	public String toString() {
 		return "EmployeeDetails [id=" + id + ", fname=" + fname + ", lname=" + lname + ", emailid=" + emailid
 				+ ", employeeid=" + employeeid + ", designation=" + designation + ", gender=" + gender + ", skills="
-				+ skills + ", password=" + password + ", department=" + department + ", salary=" + salary + "]";
+				+ skills + ", password=" + password + ", department=" + department + ", salary=" + salary
+				+ ", avgsalary=" + avgsalary + ", percentage=" + percentage + "]";
 	}
+	
+
+	
 	
 
 }

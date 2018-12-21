@@ -21,7 +21,7 @@ h1{
 	color : #ffffff;
 	text-align: left;
 	font-size: 30px;
-	font-family: sans-serif;
+	font-family: sans-serif;	
 	font-style: normal;
 	font-weight: 300
 }
@@ -96,7 +96,7 @@ input[type="password"]:focus {
     background-color:  #ff6600;
     color: white;
     font-size: 15px;
-    padding: 8px 20px;
+    padding: 8px 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -111,14 +111,14 @@ input[type="password"]:focus {
 .btn1 {
 	position : absolute;
 	margin-top:5px;
-	margin-left:15px;
+	margin-left:45px;
     background-color: #ff6600;
     color: white;
     font-size: 15px;
-    padding: 8px 13px;
+    padding: 8px 15px;
     border: none;
     cursor: pointer;
-   border-radius: 5px;
+    border-radius: 5px;
     text-align: center;
 }
 
@@ -130,7 +130,7 @@ input[type="password"]:focus {
 .btn2 {
 	position : absolute;
 	margin-top:5px;
-	margin-left:205px;
+	margin-left:185px;
     background-color:  #ff6600;
     color: white;	 
     font-size: 14px;
@@ -174,17 +174,14 @@ var password=document.vform.password.value;
 </head>
 <body>
 <div class="div1">
- 	<f:form action="validateemployee" modelAttribute="employee" method="post" name="vform" onsubmit="return validateform()" >
+ 	<f:form action="validateemployee" modelAttribute="userdetails" method="post" name="vform" onsubmit="return validateform()" >
 	<h1  align="left" style="color:#00004d">Employee Login</h1><br>
-	<f:input path="emailid" type="email" placeholder="Enter Email" name="email" required="true"/><br>
-    <f:input path="password" type="password" placeholder="Enter Password" name="password" required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br>
-    <button class="btn">Sign in</button>	
-    <f:button class="btn2" type="reset">Reset</f:button>
-     </f:form>
-    <a href="register"><button class="btn1"> Register</button></a>
-    <br><br><br><h2 class="hh1"><a href="forgotPass.jsp" style="color: #00004d;font-size: 10px;">Forgot Password</a></h2>
-    
+	<h1 style="margin-left: 20%; font-size: 20px; color: #cc0000">${error}</h1>
+	<f:input path="emailid" type="text" placeholder="Enter Email" name="email" required="true"/><br>
+    <f:input path="password" type="password" placeholder="Enter Password" name="password" required="true"/><br>
+    <button class="btn1">Sign in</button>	
+    <f:button class="btn2" type="reset">Reset</f:button><br><br><br>
+    </f:form>   
      
 </div><br>
 

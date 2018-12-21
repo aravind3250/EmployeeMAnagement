@@ -5,7 +5,7 @@
 <head>
 <style>
 .sidenav {
-  margin-top:67px;
+  margin-top:56px;
   height: 100%;
   width: 160px;
   position: fixed;
@@ -25,9 +25,6 @@
   display: block;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
-}
 
 .main {
   margin-left: 160px; /* Same as the width of the sidenav */

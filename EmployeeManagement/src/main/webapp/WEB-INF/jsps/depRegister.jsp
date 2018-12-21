@@ -8,8 +8,8 @@
 .div1 {
     background-color: #ffffff;
     width: 300px;
-    margin-top:20px;
-    margin-left:350px;
+    margin-top:100px;
+    margin-left:500px;
     padding:40px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
@@ -68,8 +68,8 @@ textarea{
 
 .btn1 {
 	position : absolute;
-	margin-top:5px;
-	margin-left  : 0px;
+	margin-top:30px;
+	margin-left : 82%;
     background-color: #ff6600;
     color: white;
     font-size: 15px;
@@ -78,6 +78,7 @@ textarea{
     cursor: pointer;
    	border-radius: 5px;
     text-align: center;
+    z-index:-10;
 }
 
 .btn1:hover {
@@ -107,21 +108,21 @@ textarea{
 </style>
 </head>
 <body>
+<%@ include file="configure.jsp" %><br>
 <div class="div1">
 <a href="departmentDetails"><button class="btn" type="submit">back</button></a>
 <f:form action="addDepartment" modelAttribute="departmentdetails" method="post"  >
-<h1  align="left" style="color:#00004d">Employee Details</h1>
+<h1  align="left" style="color:#00004d">Department Details</h1>
 	<f:input path="dName" type="text" placeholder="Department Name"/>
-	<textarea rows="5" cols="50" placeholder="Department Description">
-</textarea>
-	<f:select path="description">
-		<f:option value="Active">Select</f:option>
-		<f:option value="Active">Active and running</f:option>
-		<f:option value="shutDown">Shut Down</f:option>	
-	</f:select><br/>
+	<f:textarea path="description" rows="5" cols="50" placeholder="Department Description"></f:textarea>
 	
-		
-	<f:button class="btn1"> Sign Up</f:button>
+	<f:radiobutton path="status" value="Active"/>Active<br/>
+	<f:radiobutton path="status" value="InActive"/>InActive<br/><br>
+	
+	<!-- following are the hidden fields -->
+	<f:hidden path="id"/>
+	
+	<f:button class="btn1"> Add Details</f:button>
     <f:button class="btn2" type="reset">Reset</f:button><br><br><br>
 </f:form>
 </div>

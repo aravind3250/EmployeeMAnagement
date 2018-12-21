@@ -181,11 +181,9 @@ var password=document.vform.password.value;
  	<f:form action="registeruser" modelAttribute="userdetails" method="post" name="vform" onsubmit="return validateform()" >
 	<h1  align="left" style="color:#00004d">Sign Up</h1>
 	<f:input path="uname" type="text" placeholder="User Name" name="uname" required="true"/><br>
-	<f:input path="emailid" type="email" placeholder="E-mail" name="email" required="true"/><br>
-   <f:input path="password" type="password" placeholder="Password"  required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br>
-    <f:input path="rpassword" type="password" placeholder="Retype Password"  required="true" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/><br>
+	<f:input path="emailid" type="text" placeholder="E-mail" name="email" required="true"/><br>
+   <f:input path="password" type="password" placeholder="Password"  required="true" /><br>
+    <f:input path="rpassword" type="password" placeholder="Retype Password"  required="true" /><br>
     <f:button class="btn1"> Sign Up</f:button>
     <f:button class="btn2" type="reset">Reset</f:button><br><br><br>
      </f:form>
