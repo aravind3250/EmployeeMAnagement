@@ -1,0 +1,94 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EmployeeManagementDAOImp">
+
+	<resultMap type="employeeDepartment" id="departmentResult">
+		<id property="id" column="id" />
+		<result property="dName" column="depname" />
+		<result property="description" column="depdescription" />
+		<result property="status" column="depstatus" />
+	</resultMap>
+
+	<select id="getUser" parameterType="java.util.Map"
+		resultType="com.aravind.employeemanagement.model.UserDetails">
+		SELECT * FROM user where email=#{username} and password=#{password}
+	</select>
+
+	<select id="checkDepartment" parameterType="java.util.Map"
+		resultMap="departmentResult">
+		SELECT * FROM department where depname=#{dname}
+	</select>
+
+	<select id="checkEmployee" parameterType="java.util.Map"
+		resultType="com.aravind.employeemanagement.model.EmployeeDetails">
+		SELECT * FROM employee where employeeid=#{empid} and emailid=#{email}
+	</select>
+
+	<select id="getOneDepartment" parameterType="int"
+		resultMap="departmentResult">
+		SELECT * FROM department WHERE id=#{id}
+	</select>
+
+	<select id="getOneEmployee" parameterType="int"
+		resultType="com.aravind.employeemanagement.model.EmployeeDetails">
+		SELECT e.*,d.depname FROM employee e inner join department d on
+		d.id=e.departmentid
+		WHERE empid=#{id}
+	</select>
+
+
+	<select id="getEmployeetList" resultType="com.aravind.employeemanagement.model.EmployeeDetails">
+		select e.*,d.depname from employee e inner join department d on
+		d.id=e.departmentid
+	</select>
+
+	<select id="getDepartmentList" resultMap="departmentResult">
+		SELECT * FROM department
+	</select>
+
+	<select id="getDepartmentTotalsalary" resultType="com.aravind.employeemanagement.model.DepartmentWiseEmpSalar">
+		select departmentid,sum(salary)as salary, count(employeeid) as employeeid,depname from employee e 
+		inner join department d on d.id=e.departmentid group by departmentid ;
+	</select>
+
+	<insert id="insertDepartmentDetails"
+		parameterType="com.aravind.employeemanagement.model.EmployeeDepartment"
+		keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO department(depname,depdescription,depstatus) VALUES(#{dName},
+		#{description}, #{status})
+	</insert>
+
+	<insert id="insertEmployeeDetails"
+		parameterType="com.aravind.employeemanagement.model.EmployeeDetails"
+		keyProperty="id" useGeneratedKeys="true">
+
+		INSERT INTO
+		employee(fname,lname,emailid,employeeid,designation,gender,skills,salary,
+		password,departmentid) VALUES(#{fname}, #{lname},
+		#{emailid},#{employeeid},#{designation},#{gender},
+		#{skills},#{salary},#{password},#{departmentid})
+	</insert>
+
+	<update id="updateDepartment" parameterType="employeeDepartment">
+		UPDATE department SET
+		depname=#{dName},depdescription=#{description},depstatus=#{status}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateEmployee" parameterType="com.aravind.employeemanagement.model.EmployeeDetails">
+		UPDATE employee SET
+		fname=#{fname},lname=#{lname},emailid=#{emailid},employeeid=#{employeeid},
+		designation=#{designation},gender=#{gender},skills=#{skills},salary=#{salary},
+		password=#{password},departmentid=#{departmentid} WHERE empid=#{empid}
+	</update>
+
+
+	<delete id="deleteOneDepartment" parameterType="int">
+		DELETE FROM department WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteOneEmployee" parameterType="int">
+		DELETE FROM employee WHERE empid = #{empid}
+	</delete>
+</mapper>

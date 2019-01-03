@@ -1,91 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-.header{
-	position:fixed;
-	z-index:1;
-}
-
- .btn3 {
-	position : absolute;
-	margin-top:10px;
-	margin-left:70%;
-    background-color:  #00004d;
-    color: white;
-    font-size: 15px;
-    padding: 8px 25px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.btn3:hover {
-    background-color: #ffffff;
-    color: black;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  margin-top:0px;
-  margin-left:-10px;
-  padding: 0;
-  overflow: hidden;
-  background-color: #3399ff;
-  position: fixed;
-  border-bottom: 1px ;
-  top: 0;
-  width: 100%;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  font-size:20px;
-  font-family:'Roboto', sans-serif;;
-  padding: 25px 16px;
-  text-decoration: none;
-  border-right:1px solid #8c8c8c;
-  border-width: 2px;
-  line-height: 5px;
-  border-color:white;
-  
-}
-li a:hover {
-  background-color: #cccccc;
-  color: #333333;
-  text-decoration: none;
-}
-</style>
-<script>
-
-$('li a').on('click', function(){$(this).css("background-color","yellow");});
-
-</script>
-
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Menu.css">
 </head>
 <body>
-
-<div class=header>
-	<ul>
-	  <li><a href="analytics" >Analytics</a></li>
-	  <li><a href="configure">Configuration</a></li>
-	  <a href="index"><button class="btn3">logout</button></a>
-	</ul>
-	
-	<!-- <a href="emplogin"> Logout</button></a> -->
-</div>
-
-
-
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a style="color: white; border-right: 2px solid white;"
+					id="analitics" href="analytics">Analytics</a></li>
+				<li><a id="config"
+					style="color: white; border-right: 2px solid white;"
+					href="configure">Configure</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a style="color: white;" id="userlogout" href="logoutuser"><span
+						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
+	</div>
 </body>
 </html>
