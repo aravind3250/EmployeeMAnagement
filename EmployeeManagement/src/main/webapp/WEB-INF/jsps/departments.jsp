@@ -4,32 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="<c:url value="/resources/js/datatables.min.js" />"></script>
-<link href="<c:url value="/resources/css/jquery-ui.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/datatables.min.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/dataTables.jqueryui.min.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/body.css" />" rel="stylesheet">
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#departmenttable').DataTable();
-	})
-
-	$('#departmenttable').dataTable({
-		"lengthMenu" : [ 10, 25, 50, 75, 100 ]
-	});
-	</script>
-<style>
-
-</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="${pageContext.request.contextPath}/resourcefile/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resourcefile/css/Menu.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resourcefile/css/body.css" rel="stylesheet" type="text/css">
 <script>
 	$(document).ready(function() {
 		$("#departmentlink").addClass("active")
 
 	});
-
+	
+	$('#departmenttable').css("cursor", "default");
+	
+</script>
+<script>
+	
 	function myFunction() {
 		var result = window
-				.confirm("Are yu sure to Delet this employee Details");
+				.confirm("Are you sure to Delete this Department Details");
 		if (result) {
 			document.removeDepartment.submit();
 			return true;
@@ -39,20 +32,42 @@
 		}
 	}
 </script>
+<style>
+td
+{
+    cursor: default;
+
+}
+</style>
 </head>
-<body style="background-color: #f2f2f2;">
-	<%@ include file="configure.jsp"%><br>
-	<a href="newDepartment"><button type="button"
-			class="btn3 btn3-primary">Add Department</button></a>
+<body>
+<%
+	if(session.getAttribute("username")!=null)
+	{
+		Cookie[] cookies=request.getCookies();
+		String sessionId=null;
+		if(cookies!=null)
+		{
+			for(Cookie cookie:cookies)
+			{
+				sessionId=cookie.getValue();
+			}
+		}
+	}
+%>
+	<%@ include file="configure.jsp"%><br>	
+<%-- 	<c:out value="${pageContext.session.id}"/> --%>
+	<h4 style="margin-left:65%;color:green;">Session Id:<%=session.getId() %></h4>
+	<a href="newDepartment"><button type="button" class="btn3 btn3-primary">Add Department</button></a>
 
 	<!-- here comes the table  -->
 	<div class="table1">
 		<h1 style="margin-left: 20%; font-size: 20px; color: green">${success}</h1>
 		<h1 style="margin-left: 20%; font-size: 20px; color: #cc0000">${error}</h1>
-		<table border="1" id="departmenttable"
-			class="compact stripe hover table-border cell-border row-border order-column dt[-head|-body]-left dt-head-left"
-			style="width: 100%; background-color: #3399ff; border-color: #dddddd;">
-			<thead style="color: white;">
+		<table id="departmenttable"
+			class="sortable  compact stripe hover table-border cell-border row-border order-column dt[-head|-body]-left dt-head-left" 
+			style="width: 100%;background-color: #0059b3; border-color: #dddddd;cursor:default;">
+			<thead style="color:white;text-align: center">
 				<tr>
 					<th>Department Name</th>
 					<th>Department Description</th>
@@ -60,30 +75,46 @@
 					<th>Action</th>
 				</tr>
 			</thead>
-			<tbody  style="border-color: #dddddd;">
+			<tbody>
 				<c:forEach items="${list}" var="d">
 					<tr>
 						<td>${d.dName}</td>
 						<td>${d.description}</td>
 						<td>${d.status}</td>
-						<td style="text-align: center;"><a href="updatedepartment.html?id=${d.id}"><svg
-							xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24">
-							<path
-								d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-							<path d="M0 0h24v24H0z" fill="none" /></svg></a>
+						<td style="text-align: center;">
+						
+							<a id="departmentlink" href="updatedepartment.html?id=${d.id}">
+							<i class="material-icons">create</i></a>
 							
 							<b>|</b> 
 							
-							<a href="removeDepartment?id=${d.id}" onclick="return myFunction()"><svg
-							xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-							<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-							<path d="M0 0h24v24H0z" fill="none" /></svg> <!-- Delete --></a>
+							<a href="removeDepartment?id=${d.id}" onclick="return myFunction()">
+							<i class="material-icons">delete</i></a>
 						</td>
 					</tr>
 				</c:forEach>
 			<tbody>
 		</table>
 	</div>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			$('#departmenttable').DataTable();
+		})
+	
+		
+			
+		
+		
+		$('#departmenttable').dataTable( {
+  "lengthMenu": [5,10, 20, 50, 75, 100 ],searching:false, "pageLength": 10,
+  columnDefs: [
+	   { orderable: false, targets: -1 }
+	],
+  
+} );
+ 
+	</script>
 </body>
 </html>

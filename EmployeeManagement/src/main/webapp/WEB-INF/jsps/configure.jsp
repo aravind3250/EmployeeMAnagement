@@ -3,16 +3,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Menu.css">
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="${pageContext.request.contextPath}/resourcefile/css/Menu.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resourcefile/css/body.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#config").addClass("active")
+
+});
+
+</script>
 </head>
+<%@ include file="header.jsp"%><br>
 <body class="congfigur-body">
-	<%@ include file="header.jsp"%><br>
 	<div class="sidenav">
-		<a style="color: white; text-decoration: none; border-top: 2px solid white; 
-		   border-bottom: 2px solid white;" id="departmentlink" 
-		   href="departmentDetails">Department</a> 
-		<a style="color: white; text-decoration: none; border-bottom: 2px solid white;"
+		<a style="color: white; text-decoration: none; border-top: 1px solid white; border-bottom: 1px solid white;" 
+		id="departmentlink" href="departmentDetails">Department</a> 
+		
+		<a style="color: white; text-decoration: none; border-bottom: 1px solid white;"
 			id="employeelink" href="employeeDetails">Employees</a>
+			
 	</div>
 </body>
 </html>

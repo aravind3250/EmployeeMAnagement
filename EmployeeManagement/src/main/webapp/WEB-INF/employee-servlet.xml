@@ -18,7 +18,8 @@
 		base-package="com.aravind.employeemanagement" />
 	<context:property-placeholder
 		location="classpath:empjdbc.properties" />
-
+	
+	<mvc:resources mapping="/resourcefile/**" location="/resourcefile/" />
 	
 	<!-- Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven />

@@ -14,6 +14,10 @@ public interface EmployeeManagementDAO {
 	public List<EmployeeDepartment> getDepartment();
 
 	public EmployeeDetails get(int id);
+	
+	public EmployeeDetails get(String emailid);
+	
+	public EmployeeDetails get(EmployeeDetails employeedetails);
 
 	public List<DepartmentWiseEmpSalar> getdetails();
 

@@ -19,6 +19,10 @@ public interface EmployeeManagementService {
 	public boolean save(UserDetails userdetails);
 
 	public EmployeeDetails getEmployee(int id);
+	
+	public EmployeeDetails getEmployee(String emailid);
+	
+	public EmployeeDetails getEmployee(EmployeeDetails employeedetails);
 
 	public EmployeeDepartment getDepartment(int id);
 

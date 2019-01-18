@@ -13,7 +13,8 @@ table.dataTable thead th, table.dataTable tfoot th {
 }
 
 table.dataTable thead th, table.dataTable thead td {
-	padding: 10px 18px
+	padding: 10px 18px;
+	border-bottom: 1px solid #111
 }
 
 table.dataTable thead th:active, table.dataTable thead td:active {
@@ -21,7 +22,37 @@ table.dataTable thead th:active, table.dataTable thead td:active {
 }
 
 table.dataTable tfoot th, table.dataTable tfoot td {
-	padding: 10px 18px 6px 18px
+	padding: 10px 18px 6px 18px;
+	border-top: 1px solid #111
+}
+
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc,
+	table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled,
+	table.dataTable thead .sorting_desc_disabled {
+	cursor: default;
+	*cursor: default;
+	background-repeat: no-repeat;
+	background-position: center right
+}
+
+table.dataTable thead .sorting {
+	background-image: url("../images/sort_both.png")
+}
+
+table.dataTable thead .sorting_asc {
+	background-image: url("../images/sort_asc.png")
+}
+
+table.dataTable thead .sorting_desc {
+	background-image: url("../images/sort_desc.png")
+}
+
+table.dataTable thead .sorting_asc_disabled {
+	background-image: url("../images/sort_asc_disabled.png")
+}
+
+table.dataTable thead .sorting_desc_disabled {
+	background-image: url("../images/sort_desc_disabled.png")
 }
 
 table.dataTable tbody tr {
@@ -65,7 +96,7 @@ table.dataTable.cell-border tbody tr:first-child th, table.dataTable.cell-border
 
 table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd
 	{
-	background-color: #f9f9f9
+	background-color: e6e6e6
 }
 
 table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected
@@ -87,7 +118,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 	table.dataTable.order-column tbody tr>.sorting_3, table.dataTable.display tbody tr>.sorting_1,
 	table.dataTable.display tbody tr>.sorting_2, table.dataTable.display tbody tr>.sorting_3
 	{
-	background-color: #fafafa
+	background-color: e6e6e6
 }
 
 table.dataTable.order-column tbody tr.selected>.sorting_1, table.dataTable.order-column tbody tr.selected>.sorting_2,
@@ -99,7 +130,7 @@ table.dataTable.order-column tbody tr.selected>.sorting_1, table.dataTable.order
 
 table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1
 	{
-	background-color: #f1f1f1
+	background-color: e6e6e6
 }
 
 table.dataTable.display tbody tr.odd>.sorting_2, table.dataTable.order-column.stripe tbody tr.odd>.sorting_2
@@ -129,12 +160,12 @@ table.dataTable.display tbody tr.odd.selected>.sorting_3, table.dataTable.order-
 
 table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1
 	{
-	background-color: #fafafa
+	background-color: e6e6e6
 }
 
 table.dataTable.display tbody tr.even>.sorting_2, table.dataTable.order-column.stripe tbody tr.even>.sorting_2
 	{
-	background-color: #fcfcfc
+	background-color: e6e6e6
 }
 
 table.dataTable.display tbody tr.even>.sorting_3, table.dataTable.order-column.stripe tbody tr.even>.sorting_3
@@ -327,8 +358,8 @@ table.dataTable, table.dataTable th, table.dataTable td {
 	margin-left: 2px;
 	text-align: center;
 	text-decoration: none !important;
-	cursor: pointer;
-	*cursor: hand;
+	cursor: default;
+	*cursor: default;
 	color: #333 !important;
 	border: 1px solid transparent;
 	border-radius: 2px
@@ -494,70 +525,4 @@ table.dataTable, table.dataTable th, table.dataTable td {
 	.dataTables_wrapper .dataTables_filter {
 		margin-top: 0.5em
 	}
-}
-
-table.dataTable thead th div.DataTables_sort_wrapper {
-	position: relative
-}
-
-table.dataTable thead th div.DataTables_sort_wrapper span {
-	position: absolute;
-	top: 50%;
-	margin-top: -8px;
-	right: -18px
-}
-
-table.dataTable thead th.ui-state-default, table.dataTable tfoot th.ui-state-default
-	{
-	border-left-width: 0
-}
-
-table.dataTable thead th.ui-state-default:first-child, table.dataTable tfoot th.ui-state-default:first-child
-	{
-	border-left-width: 1px
-}
-
-.dataTables_wrapper .dataTables_paginate .fg-button {
-	box-sizing: border-box;
-	display: inline-block;
-	min-width: 1.5em;
-	padding: 0.5em;
-	margin-left: 2px;
-	text-align: center;
-	text-decoration: none !important;
-	cursor: pointer;
-	*cursor: hand;
-	border: 1px solid transparent
-}
-
-.dataTables_wrapper .dataTables_paginate .fg-button:active {
-	outline: none
-}
-
-.dataTables_wrapper .dataTables_paginate .fg-button:first-child {
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px
-}
-
-.dataTables_wrapper .dataTables_paginate .fg-button:last-child {
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px
-}
-
-.dataTables_wrapper .ui-widget-header {
-	font-weight: normal
-}
-
-.dataTables_wrapper .ui-toolbar {
-	padding: 8px
-}
-
-.dataTables_wrapper.no-footer .dataTables_scrollBody {
-	border-bottom: none
-}
-
-.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter,
-	.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing,
-	.dataTables_wrapper .dataTables_paginate {
-	color: inherit
 }

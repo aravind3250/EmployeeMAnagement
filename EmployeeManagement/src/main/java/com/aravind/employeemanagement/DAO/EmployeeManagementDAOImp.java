@@ -64,6 +64,43 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 		}
 		return oneEmployeeResult;
 	}
+	
+	@Override
+	public EmployeeDetails get(String emailid) {
+		EmployeeDetails oneEmployeeResult = null;
+		SqlSession sqlSession = EmployeeManagementUtil.getSqlSessionFactory().openSession();
+		try {
+			oneEmployeeResult = sqlSession.selectOne("getEmployeeonEmailid", emailid);
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+
+			sqlSession.close();
+		}
+		return oneEmployeeResult;
+	}
+	
+	public EmployeeDetails get(EmployeeDetails employeedetails) {
+		
+		EmployeeDetails oneEmployeeResult=null;
+		String emailid=employeedetails.getEmailid();
+		String password=employeedetails.getPassword();
+		Map<String, String> employelogin = new HashMap<>();
+		employelogin.put("emailid", emailid);
+		employelogin.put("password", password);
+		SqlSession sqlSession = EmployeeManagementUtil.getSqlSessionFactory().openSession();
+		try {
+			oneEmployeeResult = sqlSession.selectOne("getEmployee", employelogin);
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+		return oneEmployeeResult;
+	}
 
 	@Override
 	public EmployeeDepartment getDepartment(int id) {
@@ -84,7 +121,7 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 	public UserDetails getUser(UserDetails userdetails) {
 		UserDetails user = null;
 		String email = userdetails.getEmailid();
-		String password = userdetails.getpassword();
+		String password = userdetails.getPassword();
 		Map<String, String> userLogin = new HashMap<>();
 		userLogin.put("username", email);
 		userLogin.put("password", password);
@@ -96,7 +133,7 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-
+			sqlSession.commit();
 			sqlSession.close();
 		}
 		return user;
@@ -108,6 +145,15 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 		Map<String, Object> checkEmployeeMap = new HashMap<>();
 		Integer empid = empDetails.getEmployeeid();
 		String email = empDetails.getEmailid();
+		if(empDetails.getSalary()==null)
+		{
+			empDetails.setSalary(0);
+		}
+		if(empDetails.getSkills()==null)
+		{
+			empDetails.setSkills("null");
+		}
+		System.out.println(empDetails);
 		checkEmployeeMap.put("empid", empid);
 		checkEmployeeMap.put("email", email);
 
@@ -168,13 +214,18 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 		boolean flag = false;
 		SqlSession sqlSession = EmployeeManagementUtil.getSqlSessionFactory().openSession();
 		try {
+			if(empDetails.getUserType().equals("admin"))
+			{
+				empDetails.setSkills("null");
+				empDetails.setSalary(0);
+			}
 			int updateResult = sqlSession.update("updateEmployee", empDetails);
 			if (updateResult > 0) {
 				flag = true;
 			} else {
 				flag = false;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 
@@ -228,13 +279,22 @@ public class EmployeeManagementDAOImp implements EmployeeManagementDAO {
 	@Override
 	public boolean deleteDepartment(int id) {
 		boolean flag = false;
+		List<EmployeeDetails> employeedetails=null;
 		SqlSession sqlSession = EmployeeManagementUtil.getSqlSessionFactory().openSession();
 		try {
-			int deletedDepartmentResult = sqlSession.delete("deleteOneDepartment", id);
-			if (deletedDepartmentResult > 0) {
-				flag = true;
-			} else {
-				flag = false;
+			employeedetails = sqlSession.selectList("getDepartmentIdList", id);
+			if(!(employeedetails.isEmpty()))
+			{
+				return flag;
+			}
+			else
+			{
+				int deletedDepartmentResult = sqlSession.delete("deleteOneDepartment", id);
+				if (deletedDepartmentResult > 0) {
+					flag = true;
+				} else {
+					flag = false;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

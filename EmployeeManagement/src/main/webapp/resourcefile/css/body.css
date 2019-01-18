@@ -104,6 +104,11 @@
 	outline: none;
 }
 
+input[type="search"]{
+	
+	borde:1px solid #e6e6e6;
+	
+}
 .btn1 {
 	position: absolute;
 	margin-top: 5px;
@@ -151,15 +156,15 @@
 	margin-top: 100px;
 	margin-left: 180px;
 	font-size: 15px;
-	cursor: pointer;
+	cursor: default;
 	width: 85%;
 	z-index: -10;
 }
 
 .btn3{
 	position: absolute;
-	margin-top: 30px;
-	margin-left: 82%;
+	margin-top: 105px;
+	margin-left: 88%;
 	background-color: #ff6600;
 	color: white;
 	font-size: 15px;
@@ -168,7 +173,6 @@
 	cursor: pointer;
 	border-radius: 5px;
 	text-align: center;
-	z-index: -10;
 }
 
 .btn3:hover {
@@ -214,7 +218,7 @@
 .btnback {
 	position: absolute;
 	margin-top: -15px;
-	margin-left: 256px;
+	margin-left: 22%;
 	background-color: #ff6600;
 	color: white;
 	font-size: 15px;
@@ -282,8 +286,8 @@
 
 .btn4 {
 	position: absolute;
-	margin-top: 50px;
-	margin-left: 82%;
+	margin-top: 105px;
+	margin-left: 88%;
 	background-color: #ff6600;
 	color: white;
 	font-size: 15px;
@@ -292,7 +296,6 @@
 	cursor: pointer;
 	border-radius: 5px;
 	text-align: center;
-	z-index: -10;
 }
 
 .btn4:hover {
@@ -411,3 +414,35 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
    }
+   
+   
+.btn5{
+	
+	position: absolute;
+	margin-top:-3%;
+	margin-left: -10%;
+	background-color: #ff6600;
+	color: white;
+	font-size: 15px;
+	padding: 8px 15px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.btn5:hover{
+	
+	background-color: #00004d;
+	color: white;
+}
+
+.sortable tr{
+	
+	cursor:pointer;
+}
+
+.sortable tr:hover{
+	
+	cursor:pointer;
+}

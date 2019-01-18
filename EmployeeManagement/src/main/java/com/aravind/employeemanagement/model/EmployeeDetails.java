@@ -4,43 +4,46 @@ public class EmployeeDetails {
 
 	private Integer empid;
 
-	private String fname;
+	private String  fname;
 
-	private String lname;
+	private String  lname;
 
-	private String emailid;
+	private String  userType;
+	
+	private String  emailid;
 
 	private Integer employeeid;
 
-	private String designation;
+	private String  designation;
 
-	private String gender;
+	private String  gender;
 
-	private String skills;
+	private String  skills;
 
-	private String password;
+	private String  password;
 
 	private Integer salary;
 
-	private Double avgsalary;
+	private Double  avgsalary;
 
-	private double percentage;
+	private double  percentage;
 
 	private Integer departmentid;
 
-	private String depname;
+	private String  depname;
 
 	public EmployeeDetails() {
 		super();
 	}
 
-	public EmployeeDetails(Integer empid, String fname, String lname, String emailid, Integer employeeid,
-			String designation, String gender, String skills, String password, Integer salary, Double avgsalary,
-			double percentage, Integer departmentid, String depname) {
+	public EmployeeDetails(Integer empid, String fname, String lname, String userType, String emailid,
+			Integer employeeid, String designation, String gender, String skills, String password, Integer salary,
+			Double avgsalary, double percentage, Integer departmentid, String depname) {
 		super();
 		this.empid = empid;
 		this.fname = fname;
 		this.lname = lname;
+		this.userType = userType;
 		this.emailid = emailid;
 		this.employeeid = employeeid;
 		this.designation = designation;
@@ -76,6 +79,14 @@ public class EmployeeDetails {
 
 	public void setLname(String lname) {
 		this.lname = lname;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public String getEmailid() {
@@ -162,13 +173,18 @@ public class EmployeeDetails {
 		return depname;
 	}
 
-	
+	public void setDepname(String depname) {
+		this.depname = depname;
+	}
+
 	@Override
 	public String toString() {
-		return "EmployeeDetails [empid=" + empid + ", fname=" + fname + ", lname=" + lname + ", emailid=" + emailid
-				+ ", employeeid=" + employeeid + ", designation=" + designation + ", gender=" + gender + ", skills="
-				+ skills + ", password=" + password + ", salary=" + salary + ", avgsalary=" + avgsalary
-				+ ", percentage=" + percentage + ", departmentid=" + departmentid + ", depname=" + depname + "]";
+		return "EmployeeDetails [empid=" + empid + ", fname=" + fname + ", lname=" + lname + ", userType=" + userType
+				+ ", emailid=" + emailid + ", employeeid=" + employeeid + ", designation=" + designation + ", gender="
+				+ gender + ", skills=" + skills + ", password=" + password + ", salary=" + salary + ", avgsalary="
+				+ avgsalary + ", percentage=" + percentage + ", departmentid=" + departmentid + ", depname=" + depname
+				+ "]";
 	}
+
 
 }

@@ -1,5 +1,3 @@
-@charset "ISO-8859-1";
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -4324,7 +4322,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 .nav>li>a:focus, .nav>li>a:hover {
 	text-decoration: none;
-	background-color: #eee
+	background-color: 
 }
 
 .nav>li.disabled>a {
@@ -4914,7 +4912,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover
 	{
 	color: #333;
-	background-color: transparent
+
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
@@ -6419,7 +6417,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus,
 	font-size: 21px;
 	font-weight: 700;
 	line-height: 1;
-	color: #000;
+	color: #fff;
 	text-shadow: 0 1px 0 #fff;
 	filter: alpha(opacity = 20);
 	opacity: .2
@@ -6488,6 +6486,7 @@ button.close {
 
 .modal-content {
 	position: relative;
+	margin-top:10%;
 	background-color: #fff;
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;

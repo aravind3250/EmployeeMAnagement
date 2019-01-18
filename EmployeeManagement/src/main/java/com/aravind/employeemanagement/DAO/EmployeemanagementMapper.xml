@@ -12,7 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getUser" parameterType="java.util.Map"
 		resultType="com.aravind.employeemanagement.model.UserDetails">
-		SELECT * FROM user where email=#{username} and password=#{password}
+		SELECT * FROM user WHERE emailid=#{username} and password=#{password}
+	</select>
+	
+	<select id="getEmployee" parameterType="java.util.Map"
+		resultType="com.aravind.employeemanagement.model.EmployeeDetails">
+		SELECT * FROM employee WHERE emailid=#{emailid} and password=#{password}
 	</select>
 
 	<select id="checkDepartment" parameterType="java.util.Map"
@@ -36,11 +41,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		d.id=e.departmentid
 		WHERE empid=#{id}
 	</select>
-
+	
+	<select id="getEmployeeonEmailid" parameterType="String"
+		resultType="com.aravind.employeemanagement.model.EmployeeDetails">
+		SELECT e.*,d.depname FROM employee e inner join department d on
+		d.id=e.departmentid
+		WHERE emailid=#{emailid}
+	</select>
+	
+	
+	<select id="getDepartmentIdList" parameterType="int" resultType="com.aravind.employeemanagement.model.EmployeeDetails">
+		select * from employee WHERE departmentid=#{id}
+	</select>
+	
 
 	<select id="getEmployeetList" resultType="com.aravind.employeemanagement.model.EmployeeDetails">
 		select e.*,d.depname from employee e inner join department d on
-		d.id=e.departmentid
+		d.id=e.departmentid	
 	</select>
 
 	<select id="getDepartmentList" resultMap="departmentResult">
@@ -65,9 +82,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		INSERT INTO
 		employee(fname,lname,emailid,employeeid,designation,gender,skills,salary,
-		password,departmentid) VALUES(#{fname}, #{lname},
+		password,departmentid,userType) VALUES(#{fname}, #{lname},
 		#{emailid},#{employeeid},#{designation},#{gender},
-		#{skills},#{salary},#{password},#{departmentid})
+		#{skills},#{salary},#{password},#{departmentid},#{userType})
 	</insert>
 
 	<update id="updateDepartment" parameterType="employeeDepartment">
@@ -80,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE employee SET
 		fname=#{fname},lname=#{lname},emailid=#{emailid},employeeid=#{employeeid},
 		designation=#{designation},gender=#{gender},skills=#{skills},salary=#{salary},
-		password=#{password},departmentid=#{departmentid} WHERE empid=#{empid}
+		password=#{password},departmentid=#{departmentid},userType=#{userType} WHERE empid=#{empid}
 	</update>
 
 

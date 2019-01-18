@@ -1,15 +1,19 @@
 package com.aravind.employeemanagement.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,34 +41,81 @@ public class Homecontroller {
 	@RequestMapping(value = { "/", "/index" })
 	public ModelAndView emphome() {
 		ModelAndView mav = new ModelAndView("emplogin");
-		mav.addObject("userdetails", new UserDetails());
+		mav.addObject("userdetails", new EmployeeDetails());
 		return mav;
 	}
 
 	/* validate login page */
 
 	@RequestMapping(value = "/validateemployee")
-	public ModelAndView login(@ModelAttribute("userdetails") @Validated UserDetails userdetails, HttpSession session) {
+	public ModelAndView login(@ModelAttribute("userdetails") @Validated UserDetails userdetails,
+			@Validated EmployeeDetails employeedetails,HttpSession session) {
 		ModelAndView mav = null;
 		try {
 			UserDetails user = employeemanagementservice.getUser(userdetails);
 			if (user != null) {
 				mav = new ModelAndView("Analytics");
 				List<DepartmentWiseEmpSalar> list = employeemanagementservice.getdetails();
-
+				
+				session.setAttribute("uname", user.getUsername());
+				session.setAttribute("username", user.getEmailid());
+				session.setAttribute("password", user.getPassword());
 				mav.addObject("depempsal", list);
-				session.setAttribute("username", user.getUname());
-				session.setAttribute("password", user.getpassword());
+				
 				return mav;
 			} else {
-				mav = new ModelAndView("emplogin");
-				mav.addObject("error", "Incorrect credentials");
+				EmployeeDetails employeedetail1 = employeemanagementservice.getEmployee(employeedetails);
+					if(employeedetail1!=null)
+					{
+						EmployeeDetails getEmpDetails=employeemanagementservice.getEmployee(employeedetail1.getEmailid());
+						List<DepartmentWiseEmpSalar> list = employeemanagementservice.getdetails();
+						
+						session.setAttribute("username", employeedetail1.getEmailid());
+						String fname=getEmpDetails.getFname();
+						String lname=getEmpDetails.getLname();
+						String emailid=getEmpDetails.getEmailid();
+						Integer emplid=getEmpDetails.getEmployeeid();
+						String designation=getEmpDetails.getDesignation();
+						String gender=getEmpDetails.getGender();
+						String skills=getEmpDetails.getSkills();
+						String departmentname=getEmpDetails.getDepname();
+						Integer salary=getEmpDetails.getSalary();
+						String depname=getEmpDetails.getDepname();
+						String usertype=getEmpDetails.getUserType();
+						
+						session.setAttribute("empname",fname);
+						session.setAttribute("lname", lname);
+						session.setAttribute("emailid", emailid);
+						session.setAttribute("empid", emplid);
+						session.setAttribute("designation", designation);
+						session.setAttribute("gender", gender);
+						session.setAttribute("skills", skills);
+						session.setAttribute("depname", departmentname);
+						session.setAttribute("salary", salary);
+						session.setAttribute("depname", depname);						
+						session.setAttribute("usertype", usertype);	
+						mav = new ModelAndView("Analytics");
+						mav.addObject("depempsal", list);
+						return mav;
+					}else {
+						
+						mav = new ModelAndView("emplogin");
+						mav.addObject("error", "Incorrect credentials");
+					}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 
+	}
+	
+	@RequestMapping(value="/emplogin")
+	public ModelAndView redirectLogin() {
+		
+		ModelAndView mav=new ModelAndView("emplogin");
+		mav.addObject("userdetails", new UserDetails());
+		return mav;	
 	}
 
 	/**** 
@@ -172,7 +223,7 @@ public class Homecontroller {
 				mav.addObject("employeedetails", new EmployeeDetails());
 				return mav;
 			} else {
-				mav1.addObject("error", "Add Department List first");
+				mav1.addObject("error", "Add Department Details first");
 				return mav1;
 			}
 		} else {
@@ -212,7 +263,6 @@ public class Homecontroller {
 	@RequestMapping(value = "/addemployee")
 	public ModelAndView addEmployee(@ModelAttribute("employeedetails") EmployeeDetails employeedetails,
 			HttpSession session) {
-		
 		if (session.getAttribute("username") != null || session.getAttribute("password") != null) {
 			ModelAndView mav = new ModelAndView("Employees");
 			try {
@@ -482,8 +532,10 @@ public class Homecontroller {
 	 ****/
 
 	@RequestMapping(value = "/removeEmployee")
-	public ModelAndView deleteEmployeeById(@RequestParam("id") int id, HttpSession session) {
-	
+	public ModelAndView deleteEmployeeById(@RequestParam("id") int id, HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+		
+		RequestDispatcher requestdispatcher=request.getRequestDispatcher("employeeDetails");
+		
 		if (session.getAttribute("username") != null || session.getAttribute("password") != null) {
 			ModelAndView mav = new ModelAndView("Employees");
 			try {
@@ -514,11 +566,12 @@ public class Homecontroller {
 			ModelAndView mav = new ModelAndView("departments");
 			try {
 				if (employeemanagementservice.deleteDepartment(id)) {
+					mav.addObject("success", "Department deleted successful");
 					mav.addObject("list", employeemanagementservice.getDepartment());
 					return mav;
 				} else {
 
-					mav.addObject("error", "Unable to Delete the Department");
+					mav.addObject("error", "unable to delete the depatment details due to dependency");
 					mav.addObject("list", employeemanagementservice.getDepartment());
 				}
 			} catch (Exception e) {
@@ -537,9 +590,48 @@ public class Homecontroller {
 	public ModelAndView logOutUser(HttpSession session) {
 		ModelAndView mav = new ModelAndView("emplogin");
 			session.invalidate();
-			mav.addObject("success", "Logout Successfull");
 			mav.addObject("userdetails", new UserDetails());
 			return mav;
 	
 	}
+	
+	@RequestMapping(value = "/getEmployeedetailById")
+	public String getEmployeeById(HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+		String employeeId=request.getParameter("id");
+		Integer employeeid=Integer.parseInt(employeeId);
+		try {
+			PrintWriter pw = response.getWriter();
+			EmployeeDetails getEmpDetails=employeemanagementservice.getEmployee(employeeid);
+			String fname=getEmpDetails.getFname();
+			String lname=getEmpDetails.getLname();
+			String emailid=getEmpDetails.getEmailid();
+			Integer emplid=getEmpDetails.getEmployeeid();
+			String designation=getEmpDetails.getDesignation();
+			String gender=getEmpDetails.getGender();
+			String skills=getEmpDetails.getSkills();
+			String departmentname=getEmpDetails.getDepname();
+			Integer salary=getEmpDetails.getSalary();
+			String userType=getEmpDetails.getUserType();
+			
+			JSONObject jsonobject = new JSONObject();
+			jsonobject.put("empname",fname);
+			jsonobject.put("lname", lname);
+			jsonobject.put("emailid", emailid);
+			jsonobject.put("empid", emplid);
+			jsonobject.put("designation", designation);
+			jsonobject.put("gender", gender);
+			jsonobject.put("skills", skills);
+			jsonobject.putOnce("depname", departmentname);
+			jsonobject.put("salary", salary);
+			jsonobject.put("userType", userType);
+			
+			pw.println(jsonobject.toString());
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			return null;
+	
+	}
+	
 }

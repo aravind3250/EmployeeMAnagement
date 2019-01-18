@@ -39,6 +39,15 @@ public class EmployeeManagementImpl implements EmployeeManagementService {
 	public EmployeeDetails getEmployee(int id) {
 		return emloyeemanagementDAO.get(id);
 	}
+	
+	@Override
+	public EmployeeDetails getEmployee(String emailid) {
+		return emloyeemanagementDAO.get(emailid);
+	}
+	
+	public EmployeeDetails getEmployee(EmployeeDetails employeedetails) {
+		return emloyeemanagementDAO.get(employeedetails);
+	}
 
 	@Override
 	public EmployeeDepartment getDepartment(int id) {
